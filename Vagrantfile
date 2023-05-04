@@ -34,14 +34,16 @@ Vagrant.configure("2") do |config|
         echo "alias k='microk8s.kubectl'" >> /root/.bash_aliases
         chown root:root /root/.bash_aliases
 
+        sudo su -c 'echo "192.168.56.11 microk8s-1" >> /etc/hosts'
+        sudo su -c 'echo "192.168.56.12 microk8s-2" >> /etc/hosts'
+        sudo su -c 'echo "192.168.56.13 microk8s-3" >> /etc/hosts'
       EOF
       if i == 1
         microk8s.vm.provision "shell", inline: <<-EOF
-          sudo su -c 'echo "192.168.56.12 microk8s-2" >> /etc/hosts'
-          sudo su -c 'echo "192.168.56.13 microk8s-3" >> /etc/hosts'
+
           microk8s.add-node -l 3600 -t cfc1d5cdd49b30c81e72374a034d7bd2
           microk8s.enable dns
-          microk8s.enable core/mayastor --default-pool-size 2G
+          microk8s.enable core/mayastor --default-pool-size 2G --skip-hugepages-check
           microk8s.enable metallb 192.168.56.100-192.168.56.110
           microk8s.enable ingress
           microk8s.enable helm

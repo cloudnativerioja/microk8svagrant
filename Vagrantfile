@@ -2,7 +2,7 @@ Vagrant.configure("2") do |config|
   (1..3).each do |i|
     config.vm.define "microk8s_#{i}" do |microk8s|
       microk8s.vm.box = "ubuntu/focal64"
-      microk8s.vm.network "private_network", ip: "192.168.56.1#{i}", :name => 'vboxnet0', :adapter => 2
+      microk8s.vm.network "private_network", ip: "192.168.56.1#{i}", :adapter => 2
       microk8s.vm.provider "virtualbox" do |vb|
           vb.memory = 4096
           vb.cpus = 2

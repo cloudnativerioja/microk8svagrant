@@ -45,3 +45,17 @@ microk8s config > kubeconfig
 ```
 
 - Una vez descargado en el master, copiar el fichero en tu ~/.kube/config del master y cambiar la IP en el apartado **_server_** por la IP del master.
+
+### Instalar en Windows
+
+Parece que ejecutar el comando 'make' en windows no esta incluido en el path por defecto.
+
+Una vez descargado Vagrant de https://developer.hashicorp.com/vagrant/downloads y teniendo vagrant en el path, ejecutar:
+
+```bash
+vagrant up
+```
+
+para levantar las máquinas. 
+
+Los comandos anteriormente puestos simplemente cambiarlos por "vagrant ssh microk8s_1", "vagrant stop", etc.
